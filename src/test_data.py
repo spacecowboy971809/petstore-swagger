@@ -50,7 +50,7 @@ class PetPayloads(Enum):
         "photoUrls": [
             "https://creapills.com/wp-content/uploads/2022/03/40-photos-animaux-hybrides-reddit-35-1.jpg"],
         "tags": [{"id": 0, "name": "test1"}],
-        "status": "available"
+        "status": "test"
     }
     EMPTY_CATEGORY_NAME = {
         "id": 5244223216,
@@ -61,7 +61,7 @@ class PetPayloads(Enum):
         "tags": [{"id": "test_string", "name": "test1"}],
         "status": "available"
     }
-    INVALID_CATEGORY_NAME = {
+    INVALID_NAME = {
         "id": 5244223216,
         "category": {"id": "test_string", "name": "Test_string"},
         "name": None,
@@ -138,7 +138,7 @@ class UserPayloads(Enum):
 
 class OrderPayloads(Enum):
     ORDER_PLACED = {
-            "id": 12313,
+            "id": 1,
             "petId": 5244223213,
             "quantity": 2,
             "shipDate": "2023-09-22T22:20:35.100",
@@ -146,7 +146,7 @@ class OrderPayloads(Enum):
             "complete": True
         }
     ORDER_APPROVED = {
-            "id": 12314,
+            "id": 2,
             "petId": 5244223213,
             "quantity": 3,
             "shipDate": "2023-09-22T22:20:35.100",
@@ -154,7 +154,7 @@ class OrderPayloads(Enum):
             "complete": False
         }
     ORDER_DELIVERED = {
-            "id": 12315,
+            "id": 3,
             "petId": 5244223213,
             "quantity": 1,
             "shipDate": "2023-09-22T22:20:35.100",
@@ -170,7 +170,7 @@ class OrderPayloads(Enum):
             "complete": True
         }
     ORDER_BAD_PET_ID = {
-            "id": 12412424,
+            "id": 9,
             "petId": "test",
             "quantity": 1,
             "shipDate": "2023-09-22T22:20:35.100",
@@ -178,7 +178,7 @@ class OrderPayloads(Enum):
             "complete": True
         }
     ORDER_BAD_COMPLETE = {
-            "id": 12412424,
+            "id": 8,
             "petId": 5244223213,
             "quantity": 1,
             "shipDate": "2023-09-22T22:20:35.100",
@@ -187,7 +187,7 @@ class OrderPayloads(Enum):
         }
 
     ORDER_BAD_STATUS = {
-            "id": 12412424,
+            "id": 4,
             "petId": 5244223213,
             "quantity": 1,
             "shipDate": "2023-09-22T22:20:35.100",
@@ -195,7 +195,7 @@ class OrderPayloads(Enum):
             "complete": True
         }
     ORDER_BAD_SHIPDATE = {
-            "id": 12412424,
+            "id": 5,
             "petId": 5244223213,
             "quantity": 1,
             "shipDate": "test",

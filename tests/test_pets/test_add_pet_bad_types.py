@@ -8,7 +8,7 @@ import allure
 # Define a test case for adding a pet with bad types
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @pytest.mark.parametrize("payload", [PetPayloads.NULL_PAYLOAD.value, PetPayloads.INVALID_ID.value,
-                                     PetPayloads.INVALID_CATEGORY_ID.value, PetPayloads.INVALID_CATEGORY_NAME.value])
+                                     PetPayloads.INVALID_CATEGORY_ID.value, PetPayloads.INVALID_NAME.value])
 @allure.epic("Pets_tests")
 @allure.description("Test add pet with bad types")
 def test_add_pet_bad_types(payload, api_key):

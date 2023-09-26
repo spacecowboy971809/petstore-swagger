@@ -49,3 +49,7 @@ def test_update_pet_with_form_data(payload, api_key):
     parsed_response_text = find_id_response.json( )
     delete_pet_response = delete_pet(pet_id=parsed_response_text.get("id"), api_key=api_key)
     assert delete_pet_response.status_code == 200, "Wrong response code for delete pet"
+
+    # Update deleted pet  using form data
+    update_with_form_data_response = update_pet_with_form(pet_id=payload ["id"], name=name_2, status=status_2)
+    assert update_with_form_data_response.status_code != 200, "Wrong response code for update pet with form data"

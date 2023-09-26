@@ -32,4 +32,4 @@ def test_delete_user(payload):
 
     # Attempt to delete the user again, expecting status code 404
     delete_user_response = delete_user_by_username(username=payload["username"])
-    assert delete_user_response.status_code == 404, "Wrong response code for delete user"
+    assert delete_user_response.status_code == 404, "Wrong response code for delete user does not exist"

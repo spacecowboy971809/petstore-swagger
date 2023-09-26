@@ -4,10 +4,9 @@ from src.test_data import *
 import allure
 
 @pytest.mark.parametrize("payload", [UserPayloads.USER.value])
-@pytest.mark.parametrize("payload_2", [UserPayloads.USER_2.value])
 @allure.epic("Users_tests")
 @allure.description("Test function create user with list bad types")
-def test_create_user_with_list_bad_types(payload, payload_2):
+def test_create_user_with_list_dupl(payload, payload_2):
     # Check if the first user exists, and create if not
     get_user_response = get_user_by_username(username=payload["username"])
     if get_user_response.status_code != 200:
@@ -24,7 +23,7 @@ def test_create_user_with_list_bad_types(payload, payload_2):
         assert create_user_response.status_code == 200, "Wrong response code for create user"
 
     # Check if the second user exists, and create if not
-    get_user_response = get_user_by_username(username=payload_2["username"])
+    get_user_response = get_user_by_username(username=payload["username"])
     if get_user_response.status_code != 200:
         create_user_response = create_user(
             id=payload_2["id"],

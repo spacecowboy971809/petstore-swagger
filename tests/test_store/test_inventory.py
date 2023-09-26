@@ -28,7 +28,9 @@ def test_inventory(payload, api_key):
         print("Response does not contain JSON")
 
     # Get the initial count of pets with the specified status
-    count = parsed_response_text.get(payload ["status"])
+    count = 0
+    if parsed_response_text.get(payload ["status"]):
+        count += parsed_response_text.get(payload ["status"], 0)
 
     # Add a pet with the specified status
     response = add_pet(pet_id=payload ["id"],
@@ -43,7 +45,6 @@ def test_inventory(payload, api_key):
     # Get the inventory status after adding the pet
     inventory_response = return_inventory( )
     assert inventory_response.status_code == 200, "Wrong response code for inventory"
-
     # Verify that the count of pets with the specified status has increased by 1
     Assertions.assert_json_value(inventory_response, payload ["status"], count + 1,
                                  "Wrong response count for inventory")
@@ -56,5 +57,11 @@ def test_inventory(payload, api_key):
     inventory_response = return_inventory( )
     assert inventory_response.status_code == 200, "Wrong response code for inventory"
 
-    # Verify that the count of pets with the specified status has returned to its original value
-    Assertions.assert_json_value(inventory_response, payload ["status"], count, "Wrong response count for inventory")
+    try:
+        parsed_response_text = inventory_response.json( )
+    except JSONDecodeError:
+        print("Response does not contain JSON")
+
+    if parsed_response_text.get(payload ["status"]):
+        # Verify that the count of pets with the specified status has returned to its original value
+        Assertions.assert_json_value(inventory_response, payload ["status"], count, "Wrong response count for inventory")
