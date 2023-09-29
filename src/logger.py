@@ -5,13 +5,13 @@ from requests import Response
 
 class Logger:
     # Define the log file name based on the current date and time
-    file_name = f"logs/log_" + str(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
+    file_name = f"logs/log_" + str(datetime.datetime.now( ).strftime("%Y-%m-%d_%H-%M-%S")) + ".log"
 
     @classmethod
     def _write_log_to_file(cls, data):
         try:
             # Open the log file and append data to it
-            with open(cls.file_name,  'a', encoding='utf-8') as logger_file:
+            with open(cls.file_name, 'a', encoding='utf-8') as logger_file:
                 logger_file.write(data)
         except FileNotFoundError:
             # Handle the case where the log file is not found
@@ -25,7 +25,7 @@ class Logger:
         # Create data to log for the request
         data_to_add = f"\n-----\n"
         data_to_add += f"Test: {testname}\n"
-        data_to_add += f"Time: {str(datetime.datetime.now())}\n"
+        data_to_add += f"Time: {str(datetime.datetime.now( ))}\n"
         data_to_add += f"Request method: {method}\n"
         data_to_add += f"Request URL: {url}\n"
         data_to_add += f"Request data: {data}\n"

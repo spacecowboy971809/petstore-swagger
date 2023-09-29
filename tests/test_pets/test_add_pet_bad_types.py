@@ -1,5 +1,4 @@
 import pytest
-from json.decoder import JSONDecodeError
 from pet_requests import *
 from src.test_data import *
 import allure
@@ -7,11 +6,29 @@ import allure
 
 # Define a test case for adding a pet with bad types
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
-@pytest.mark.parametrize("payload", [PetPayloads.NULL_PAYLOAD.value, PetPayloads.INVALID_ID.value,
-                                     PetPayloads.INVALID_CATEGORY_ID.value, PetPayloads.INVALID_NAME.value])
+@pytest.mark.parametrize("payload", [PetPayloads.NULL_PAYLOAD.value, PetPayloads.INVALID_PET_ID.value,
+                                     PetPayloads.INVALID_CATEGORY_ID.value, PetPayloads.EMPTY_NAME.value])
 @allure.epic("Pets_tests")
-@allure.description("Test add pet with bad types")
 def test_add_pet_bad_types(payload, api_key):
+    """
+    Add a new pet to the store with bad types
+    body *:object:
+    (body)
+        Pet{
+        id: integer($int64)
+        Category:
+        {id: integer($int64)
+        name: string}
+        name*: string
+        photoUrls*: string
+        tags:
+        {id: integer($int64)
+        name: string}
+        status:	string
+        pet status in the store
+        Enum: [ available, pending, sold ]
+        }
+    """
     # Check if a pet with the given ID exists, and delete it if it does
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code == 200:

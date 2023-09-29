@@ -7,8 +7,15 @@ import allure
 # Define a test case for deleting a pet without API keys
 @pytest.mark.parametrize("payload", [PetPayloads.DOG.value])
 @allure.epic("Pets_tests")
-@allure.description("Negative test delete pet without api_keys")
 def test_delete_pet_no_api_key(payload):
+    """
+    Test delete pet with no api key
+    Parameters:
+    api_key:string
+    (header)
+    petId *: integer($int64)
+    (path)
+    """
     # Check if a pet with the given ID exists, and add it if it doesn't
     find_if_response = find_by_pet_id(pet_id=payload ["id"])
     if find_if_response.status_code != 200:

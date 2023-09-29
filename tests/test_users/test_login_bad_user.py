@@ -6,8 +6,15 @@ import allure
 
 @pytest.mark.parametrize("payload", [UserPayloads.USER.value])
 @allure.epic("Users_tests")
-@allure.description("Test login bad user")
 def test_login_bad_user(payload):
+    """
+    Test login bad user
+    Parameters:
+    username *: string
+    (query)
+    password *: string
+    (query)
+    """
     # Check if the user exists, and delete if it does (cleanup)
     get_user_response = get_user_by_username(username=payload ["username"])
     if get_user_response.status_code == 200:

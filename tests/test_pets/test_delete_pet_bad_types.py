@@ -8,8 +8,15 @@ import allure
 # Define a test case for deleting a pet with bad types
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @allure.epic("Pets_tests")
-@allure.description("Test delete pet")
 def test_delete_pet_bad_types(api_key):
+    """
+    Test delete pet with bad types
+    Parameters:
+    api_key:string
+    (header)
+    petId *: integer($int64)
+    (path)
+    """
     delete_pet_response = delete_pet("test_string", api_key=api_key)
 
     # Assert error response

@@ -8,8 +8,26 @@ import allure
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @pytest.mark.parametrize("payload", [PetPayloads.CAT.value])
 @allure.epic("Pets_tests")
-@allure.description("Test add pet duplicate")
 def test_add_pet_dupl(payload, api_key):
+    """
+    Add existing pet to the store
+    body *:object:
+    (body)
+        Pet{
+        id: integer($int64)
+        Category:
+        {id: integer($int64)
+        name: string}
+        name*: string
+        photoUrls*: string
+        tags:
+        {id: integer($int64)
+        name: string}
+        status:	string
+        pet status in the store
+        Enum: [ available, pending, sold ]
+        }
+    """
     # Check if a pet with the given ID exists, and add it if it doesn't
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code != 200:

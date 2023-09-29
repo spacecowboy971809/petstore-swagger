@@ -6,11 +6,29 @@ import allure
 
 # Test case for updating a pet without name and photo URLs
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
-@pytest.mark.parametrize("payload", [PetPayloads.EMPTY_CATEGORY_NAME.value])
+@pytest.mark.parametrize("payload", [PetPayloads.EMPTY_NAME.value, PetPayloads.NULL_PAYLOAD.value])
 @pytest.mark.parametrize("payload_2", [PetPayloads.DOG.value])
 @allure.epic("Pets_tests")
-@allure.description("Test update pet without name photo urls")
 def test_update_pet_without_name_photo_urls(payload, payload_2, api_key):
+    """
+    Test update pet without name photo urls
+    body *: object:
+    (body)
+        Pet{
+        id: integer($int64)
+        Category:
+        {id: integer($int64)
+        name: string}
+        name*: string
+        photoUrls*: string
+        tags:
+        {id: integer($int64)
+        name: string}
+        status:	string
+        pet status in the store
+        Enum: [ available, pending, sold ]
+        }
+    """
     # Check if a pet with the given ID exists
     find_by_pet_id_response = find_by_pet_id(pet_id=payload_2 ["id"])
 

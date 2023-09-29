@@ -12,8 +12,22 @@ import allure
                                            OrderPayloads.ORDER_BAD_COMPLETE.value, OrderPayloads.ORDER_BAD_STATUS.value,
                                            OrderPayloads.ORDER_BAD_SHIPDATE.value])
 @allure.epic("Store_tests")
-@allure.description("Test place order with bad types")
 def test_place_order_bad_types(payload, order_payload, api_key):
+    """
+    Test place order with bad types
+    body *: object
+    (body)
+        Order{
+        id: integer($int64)
+        petId: integer($int64)
+        quantity: integer($int32)
+        shipDate: string($date-time)
+        status: string
+        Enum:
+        [ placed, approved, delivered ]
+        complete: boolean
+        }
+    """
     # Check if a pet with the given ID exists and add it if not
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code != 200:

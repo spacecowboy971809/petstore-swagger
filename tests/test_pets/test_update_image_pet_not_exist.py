@@ -12,6 +12,16 @@ import allure
 @allure.epic("Pets_tests")
 @allure.description("Test upload image, pet_id does not exist")
 def test_update_image_pet_not_exist(file, api_key, payload, additional_metadata):
+    """
+    Test update image, pet_id does not exist
+    Parameters:
+    petId *: integer($int64)
+    (path)
+    additionalMetadata: string
+    (formData)
+    file: file
+    (formData)
+    """
     # Check if a pet with the given ID exists and delete it if found
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code == 200:

@@ -7,8 +7,25 @@ import allure
 
 @pytest.mark.parametrize("payload", [UserPayloads.USER.value])
 @allure.epic("Users_tests")
-@allure.description("Test function update user by username")
 def test_update_user_by_username(payload):
+    """
+    Test function update user by username
+    Parameters:
+    username *: string
+    (path)
+    body *: object
+    (body)
+        User{
+        id: integer($int64)
+        username: string
+        firstName: string
+        lastName: string
+        email: string
+        password: string
+        phone: string
+        userStatus: integer($int32)
+        }
+    """
     # Define new values for updating the user
     id_2 = 124141231
     first_name_2 = "test_user_2"

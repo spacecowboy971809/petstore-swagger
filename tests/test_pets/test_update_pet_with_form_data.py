@@ -9,8 +9,17 @@ import allure
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @pytest.mark.parametrize("payload", [PetPayloads.DOG.value])
 @allure.epic("Pets_tests")
-@allure.description("Test update pet with form data")
 def test_update_pet_with_form_data(payload, api_key):
+    """
+    Test update pet with form data
+    Parameters:
+    petId *: integer($int64)
+    (path)
+    name: string
+    (formData)
+    status: string
+    (formData)
+    """
     # New values for name and status
     name_2 = "test12442424"
     status_2 = "sold"

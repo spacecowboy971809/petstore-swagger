@@ -8,8 +8,17 @@ import allure
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @pytest.mark.parametrize("payload", [PetPayloads.DOG.value])
 @allure.epic("Pets_tests")
-@allure.description("Test update pet with form data")
 def test_update_pet_with_form_data_status_not_in_enum(payload, api_key):
+    """
+    Test update pet with form data status not in enum
+    Parameters:
+        petId *: integer($int64)
+        (path)
+        name: string
+        (formData)
+        status: string
+        (formData)
+    """
     # New values for name and status
     name_2 = "test12442424"
     status_2 = "test"

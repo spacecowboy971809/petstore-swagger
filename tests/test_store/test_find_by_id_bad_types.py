@@ -5,8 +5,13 @@ import allure
 
 # Test case for finding an order by ID
 @allure.epic("Store_tests")
-@allure.description("Test find order by id with bad types")
 def test_find_by_id_bad_types():
+    """
+    Test find order by id with bad type orderId
+    Parameters:
+    orderId *: integer($int64)
+    (path)
+    """
     # Find the order by ID
     find_by_id_response = find_purchase_by_id('test_string')
 

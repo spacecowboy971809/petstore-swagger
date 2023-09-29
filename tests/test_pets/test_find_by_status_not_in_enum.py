@@ -5,8 +5,15 @@ import allure
 
 # Define a test case for finding pets by a status not in the enum
 @allure.epic("Pets_tests")
-@allure.description("Test find pets by status not in enum")
 def test_find_by_status_not_in_enum():
+    """
+    Test find pets by status not in enum
+    Parameters:
+    status *: array[string]
+    (query)
+    Status values that need to be considered for filter
+    Available values : available, pending, sold
+    """
     # Specify a status that is not in the enum
     status = "test"
 

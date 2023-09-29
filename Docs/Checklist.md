@@ -166,7 +166,7 @@ Logs user into the system
 - [ ] Invalid username/password supplied
 
 ### GET /user/logout
-Logs out current logged in user session
+Logs out current logged-in user session
 
 **Positive:**
 - [ ] User is logged-in
@@ -182,3 +182,5 @@ Create user
 **Negative:**
 - [ ] Use incorrect data types
 - [ ] Request without being logged-in
+
+### [Main page](https://github.com/spacecowboy971809/petstore-swagger)

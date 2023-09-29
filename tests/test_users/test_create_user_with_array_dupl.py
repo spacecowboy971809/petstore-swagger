@@ -8,8 +8,22 @@ import allure
 @pytest.mark.parametrize("payload", [UserPayloads.USER.value])
 @pytest.mark.parametrize("payload_2", [UserPayloads.USER_2.value])
 @allure.epic("Users_tests")
-@allure.description("Test function create user with array duplicate")
 def test_create_user_with_array_dupl(payload, payload_2):
+    """
+    Test function create user with array duplicate
+    body *: object
+    (body)
+        [User{
+        id:	integer($int64)
+        username: string
+        firstName: string
+        lastName: string
+        email: string
+        password: string
+        phone: string
+        userStatus:	integer($int32)
+        }]
+    """
     # Check if the first user with the given username exists and create it if not found
     get_user_response = get_user_by_username(username=payload["username"])
     if get_user_response.status_code != 200:

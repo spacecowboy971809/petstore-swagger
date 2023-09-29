@@ -10,8 +10,17 @@ import allure
 @pytest.mark.parametrize("file", [FileNames.JPG_FILE.value, FileNames.PNG_FILE.value])
 @pytest.mark.parametrize("additional_metadata", [AdditionalMetadatas.JPG_METADATA.value])
 @allure.epic("Pets_tests")
-@allure.description("Test update image")
 def test_update_image(file, api_key, payload, additional_metadata):
+    """
+    Test update image
+    Parameters:
+    petId *: integer($int64)
+    (path)
+    additionalMetadata: string
+    (formData)
+    file: file
+    (formData)
+    """
     # Check if a pet with the given ID exists and delete it
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code == 200:

@@ -12,8 +12,22 @@ import allure
 @pytest.mark.parametrize("order_payload", [OrderPayloads.ORDER_PLACED.value, OrderPayloads.ORDER_APPROVED.value,
                                            OrderPayloads.ORDER_DELIVERED.value])
 @allure.epic("Store_tests")
-@allure.description("Test place order")
 def test_place_order(payload, order_payload, api_key):
+    """
+    Test place order
+    body *: object
+    (body)
+        Order{
+        id: integer($int64)
+        petId: integer($int64)
+        quantity: integer($int32)
+        shipDate: string($date-time)
+        status: string
+        Enum:
+        [ placed, approved, delivered ]
+        complete: boolean
+        }
+    """
     # Check if a pet with the given ID exists and add it if not
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code != 200:

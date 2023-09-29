@@ -22,7 +22,11 @@ def place_order(order_id, pet_id, quantity, ship_date, status, complete):
 
 def find_purchase_by_id(order_id):
     """
-    Find purchase order by ID. For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
+    Find purchase order by ID. For valid response try integer IDs with value >= 1 and <= 10. Other values will generate exceptions
+    Parameters:
+        orderId *
+        integer($int64)
+        (path)
     """
     url = f"store/order/{order_id}"
     return MyRequests.get(url)
@@ -31,6 +35,9 @@ def find_purchase_by_id(order_id):
 def delete_purchase_by_id(order_id):
     """
     Delete purchase order by ID
+    Parameters:
+    orderId *: integer($int64)
+    (path)
     """
     url = f"store/order/{order_id}"
     return MyRequests.delete(url)

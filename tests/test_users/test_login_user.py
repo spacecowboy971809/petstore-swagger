@@ -6,8 +6,15 @@ import allure
 
 @pytest.mark.parametrize("payload", [UserPayloads.USER.value])
 @allure.epic("Users_tests")
-@allure.description("Test function login user")
 def test_login_user(payload):
+    """
+    Test function login user
+    Parameters:
+    username *: string
+    (query)
+    password *: string
+    (query)
+    """
     # Check if the user exists, and create if it doesn't
     get_user_response = get_user_by_username(username=payload ["username"])
     if get_user_response.status_code != 200:

@@ -6,6 +6,9 @@ import os
 def find_by_pet_id(pet_id):
     """
     Find pet by ID
+    Parameters:
+    petId *: integer($int64)
+    (path)
     """
     url = f"pet/{pet_id}"
     return MyRequests.get(url)
@@ -14,6 +17,13 @@ def find_by_pet_id(pet_id):
 def upload_image_pet(pet_id, file_path, additional_metadata):
     """
     Uploads an image
+    Parameters:
+    petId *: integer($int64)
+    (path)
+    additionalMetadata: string
+    (formData)
+    file: file
+    (formData)
     """
     url = f"pet/{pet_id}/uploadImage"
     script_directory = os.path.dirname(os.path.abspath(__file__))
@@ -24,9 +34,22 @@ def upload_image_pet(pet_id, file_path, additional_metadata):
 def add_pet(pet_id, category, name, photo_urls, tags, status):
     """
     Add a new pet to the store
-    Pet status in the store Enum:
-    [ available, pending, sold ]
-
+    body *:object:
+    (body)
+        Pet{
+        id: integer($int64)
+        Category:
+        {id: integer($int64)
+        name: string}
+        name*: string
+        photoUrls*: string
+        tags:
+        {id: integer($int64)
+        name: string}
+        status:	string
+        pet status in the store
+        Enum: [ available, pending, sold ]
+        }
     """
     url = "pet"
     payload = {
@@ -43,6 +66,21 @@ def add_pet(pet_id, category, name, photo_urls, tags, status):
 def update_pet(pet_id, category, name, photo_urls, tags, status):
     """
     Update an existing pet
+    body *: object:
+    (body)
+        Pet:
+        { id: integer($int64)
+        Category:
+        {id: integer($int64)
+        name: string}
+        name*: string
+        photoUrls*: string
+        tags:
+        {id: integer($int64)
+        name: string}
+        status:	string
+        pet status in the store
+        Enum: [ available, pending, sold ]
     """
     url = f"pet"
     payload = {
@@ -59,6 +97,11 @@ def update_pet(pet_id, category, name, photo_urls, tags, status):
 def find_by_status(status):
     """
     Finds Pets by status
+    Parameters:
+    status *: array[string]
+    (query)
+    Status values that need to be considered for filter
+    Available values : available, pending, sold
     """
     payload = {"status": status}
     url = "pet/findByStatus"
@@ -68,6 +111,13 @@ def find_by_status(status):
 def update_pet_with_form(pet_id, name, status):
     """
     Updates a pet in the store with form data
+    Parameters:
+    petId *: integer($int64)
+    (path)
+    name: string
+    (formData)
+    status: string
+    (formData)
     """
     payload = {"name": name, "status": status}
     url = f"pet/{pet_id}"
@@ -78,11 +128,15 @@ def update_pet_with_form(pet_id, name, status):
 def delete_pet(pet_id, api_key):
     """
     Deletes a pet
+    Parameters:
+    api_key:string
+    (header)
+    petId *: integer($int64)
+    (path)
     """
-    payload = {"petId": pet_id}
     headers = {"api_key": api_key}
     url = f"pet/{pet_id}"
-    return MyRequests.delete(url, json=payload, headers=headers)
+    return MyRequests.delete(url, headers=headers)
 
 
 def delete_pet_without_api_key(pet_id):

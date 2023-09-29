@@ -9,8 +9,22 @@ import allure
 # Test case for creating a user
 @pytest.mark.parametrize("payload", [UserPayloads.USER.value])
 @allure.epic("Users_tests")
-@allure.description("Test function create user")
 def test_create_user(payload):
+    """
+    Test function create user
+    body *: object
+    (body)
+        User{
+        id:	integer($int64)
+        username: string
+        firstName: string
+        lastName: string
+        email: string
+        password: string
+        phone: string
+        userStatus:	integer($int32)
+        }
+    """
     # Check if a user with the given username exists and delete it if not
     get_user_response = get_user_by_username(username=payload ["username"])
     if get_user_response.status_code == 200:

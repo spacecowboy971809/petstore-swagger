@@ -9,8 +9,13 @@ import allure
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @pytest.mark.parametrize("order_payload", [OrderPayloads.ORDER_PLACED.value])
 @allure.epic("Store_tests")
-@allure.description("Test find order by id")
 def test_find_by_id(payload, order_payload, api_key):
+    """
+    Test find order by id
+    Parameters:
+    orderId *: integer($int64)
+    (path)
+    """
     # Check if the order with the given ID exists
     find_by_id_response = find_purchase_by_id(order_id=order_payload ["id"])
 

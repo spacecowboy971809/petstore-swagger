@@ -2,7 +2,6 @@ import pytest
 from store_requests import *
 from pet_requests import *
 from src.test_data import *
-from src.assertions import *
 import allure
 
 
@@ -11,8 +10,22 @@ import allure
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @pytest.mark.parametrize("order_payload", [OrderPayloads.ORDER_PLACED.value])
 @allure.epic("Store_tests")
-@allure.description("Test place order")
 def test_place_order_dupl(payload, order_payload, api_key):
+    """
+    Test place duplicate order
+    body *: object
+    (body)
+        Order{
+        id: integer($int64)
+        petId: integer($int64)
+        quantity: integer($int32)
+        shipDate: string($date-time)
+        status: string
+        Enum:
+        [ placed, approved, delivered ]
+        complete: boolean
+        }
+    """
     # Check if a pet with the given ID exists and add it if not
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code != 200:

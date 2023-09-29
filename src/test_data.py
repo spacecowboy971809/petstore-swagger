@@ -1,11 +1,14 @@
 from enum import Enum
 
+
 class APIKeys(Enum):
     VALID_API_KEY = "75309586-a480-43a8-a656-8228fab29bac"
+
 
 class BadAPIKeys(Enum):
     INVALID_API_KEY = "25309586-a480-43a8-a656-8228fab29baa"
     NULL_API_KEY = None
+
 
 class PetPayloads(Enum):
     DOG = {
@@ -52,24 +55,24 @@ class PetPayloads(Enum):
         "tags": [{"id": 0, "name": "test1"}],
         "status": "test"
     }
-    EMPTY_CATEGORY_NAME = {
+    INVALID_TAGS_ID = {
         "id": 5244223216,
-        "category": {"id": 4, "name": ""},
+        "category": {"id": 4, "name": "test"},
         "name": "doggie",
         "photoUrls": [
             "https://creapills.com/wp-content/uploads/2022/03/40-photos-animaux-hybrides-reddit-35-1.jpg"],
         "tags": [{"id": "test_string", "name": "test1"}],
         "status": "available"
     }
-    INVALID_NAME = {
+    EMPTY_NAME = {
         "id": 5244223216,
-        "category": {"id": "test_string", "name": "Test_string"},
+        "category": {"id": 12424, "name": "Test_string"},
         "name": None,
         "photoUrls": None,
         "tags": [{"id": 0, "name": "test1"}],
         "status": "available"
     }
-    INVALID_ID = {
+    INVALID_PET_ID = {
         "id": "test_string",
         "category": {"id": 4, "name": ""},
         "name": "doggie",
@@ -79,19 +82,22 @@ class PetPayloads(Enum):
         "status": "available"
     }
 
+
 class FileNames(Enum):
-    JPG_FILE = {"file_name" : "photo_2023-08-10_14-04-34.jpg",
-                "file_path" : "src/photo_2023-08-10_14-04-34.jpg"}
-    PNG_FILE = {"file_name" : "photo_2023-08-10_14-04-34.png",
-                "file_path" : "src/photo_2023-08-10_14-04-34.png"}
+    JPG_FILE = {"file_name": "photo_2023-08-10_14-04-34.jpg",
+                "file_path": "src/photo_2023-08-10_14-04-34.jpg"}
+    PNG_FILE = {"file_name": "photo_2023-08-10_14-04-34.png",
+                "file_path": "src/photo_2023-08-10_14-04-34.png"}
+
 
 class BadFileNames(Enum):
-    TEXT_FILE = {"file_name" : "test.txt",
-                 "file_path" : "src/test.txt"}
+    TEXT_FILE = {"file_name": "test.txt",
+                 "file_path": "src/test.txt"}
 
 
 class AdditionalMetadatas(Enum):
     JPG_METADATA = "AdditionalMetadata"
+
 
 class UserPayloads(Enum):
     USER = {
@@ -138,67 +144,67 @@ class UserPayloads(Enum):
 
 class OrderPayloads(Enum):
     ORDER_PLACED = {
-            "id": 1,
-            "petId": 5244223213,
-            "quantity": 2,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "placed",
-            "complete": True
-        }
+        "id": 1,
+        "petId": 5244223213,
+        "quantity": 2,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "placed",
+        "complete": True
+    }
     ORDER_APPROVED = {
-            "id": 2,
-            "petId": 5244223213,
-            "quantity": 3,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "approved",
-            "complete": False
-        }
+        "id": 2,
+        "petId": 5244223213,
+        "quantity": 3,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "approved",
+        "complete": False
+    }
     ORDER_DELIVERED = {
-            "id": 3,
-            "petId": 5244223213,
-            "quantity": 1,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "delivered",
-            "complete": True
-        }
+        "id": 3,
+        "petId": 5244223213,
+        "quantity": 1,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "delivered",
+        "complete": True
+    }
     ORDER_BAD_ID = {
-            "id": "test",
-            "petId": 5244223213,
-            "quantity": 1,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "delivered",
-            "complete": True
-        }
+        "id": "test",
+        "petId": 5244223213,
+        "quantity": 1,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "delivered",
+        "complete": True
+    }
     ORDER_BAD_PET_ID = {
-            "id": 9,
-            "petId": "test",
-            "quantity": 1,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "delivered",
-            "complete": True
-        }
+        "id": 9,
+        "petId": "test",
+        "quantity": 1,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "delivered",
+        "complete": True
+    }
     ORDER_BAD_COMPLETE = {
-            "id": 8,
-            "petId": 5244223213,
-            "quantity": 1,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "delivered",
-            "complete": "test"
-        }
+        "id": 8,
+        "petId": 5244223213,
+        "quantity": 1,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "delivered",
+        "complete": "test"
+    }
 
     ORDER_BAD_STATUS = {
-            "id": 4,
-            "petId": 5244223213,
-            "quantity": 1,
-            "shipDate": "2023-09-22T22:20:35.100",
-            "status": "test",
-            "complete": True
-        }
+        "id": 4,
+        "petId": 5244223213,
+        "quantity": 1,
+        "shipDate": "2023-09-22T22:20:35.100",
+        "status": "test",
+        "complete": True
+    }
     ORDER_BAD_SHIPDATE = {
-            "id": 5,
-            "petId": 5244223213,
-            "quantity": 1,
-            "shipDate": "test",
-            "status": "delivered",
-            "complete": True
-        }
+        "id": 5,
+        "petId": 5244223213,
+        "quantity": 1,
+        "shipDate": "test",
+        "status": "delivered",
+        "complete": True
+    }

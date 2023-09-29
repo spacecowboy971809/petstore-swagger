@@ -11,8 +11,11 @@ import allure
 @pytest.mark.parametrize("payload", [PetPayloads.CAT.value, PetPayloads.DOG.value, PetPayloads.RACCOON.value])
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
 @allure.epic("Store_tests")
-@allure.description("Test inventory")
 def test_inventory(payload, api_key):
+    """
+    Test inventory
+    Returns a map of status codes to quantities
+    """
     # Check if a pet with the given ID exists and delete it
     find_by_pet_id_response = find_by_pet_id(pet_id=payload ["id"])
     if find_by_pet_id_response.status_code == 200:

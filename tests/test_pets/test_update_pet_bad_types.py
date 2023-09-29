@@ -1,22 +1,21 @@
 import pytest
 from pet_requests import *
 from src.test_data import *
-from src.assertions import *
 import allure
 
 
-# Test case for updating a pet
+# Test case for updating a pet with bad types
 @pytest.mark.parametrize("api_key", [APIKeys.VALID_API_KEY.value])
-@pytest.mark.parametrize("payload", [PetPayloads.CAT.value])
+@pytest.mark.parametrize("payload", [PetPayloads.INVALID_TAGS_ID.value, PetPayloads.INVALID_PET_ID.value, PetPayloads.INVALID_CATEGORY_ID.value])
 @pytest.mark.parametrize("payload_2", [PetPayloads.DOG.value])
 @allure.epic("Pets_tests")
-def test_update_pet(payload, payload_2, api_key):
+def test_update_pet_bad_types(payload, payload_2, api_key):
     """
-    Test update pet
+    Test update pet with bad types
     body *: object:
     (body)
-        Pet:
-        { id: integer($int64)
+        Pet{
+        id: integer($int64)
         Category:
         {id: integer($int64)
         name: string}
@@ -28,10 +27,13 @@ def test_update_pet(payload, payload_2, api_key):
         status:	string
         pet status in the store
         Enum: [ available, pending, sold ]
+        }
     """
-    # Check if a pet with the given ID exists and delete it if found
+    # Check if a pet with the given ID exists
     find_by_pet_id_response = find_by_pet_id(pet_id=payload_2 ["id"])
+
     if find_by_pet_id_response.status_code == 200:
+        # Delete the pet if it exists
         delete_pet_response = delete_pet(pet_id=payload_2 ["id"], api_key=api_key)
         assert delete_pet_response.status_code == 200, "Wrong response code for delete pet"
 
@@ -44,7 +46,7 @@ def test_update_pet(payload, payload_2, api_key):
                        status=payload_2 ["status"])
     assert response.status_code == 200, "Wrong response code for add pet"
 
-    # Update the pet with new information
+    # Update the pet without name and photo URLs
     update_response = update_pet(pet_id=payload_2 ["id"],
                                  category=payload ["category"],
                                  name=payload ["name"],
@@ -52,19 +54,9 @@ def test_update_pet(payload, payload_2, api_key):
                                  tags=payload ["tags"],
                                  status=payload ["status"])
 
-    # Assert that the response status code indicates a successful update
-    assert update_response.status_code == 200, "Wrong response code for update pet"
+    # Assert that the update operation did not succeed
+    assert update_response.status_code != 200, "Wrong response code for add pet"
 
-    # Check if the updated pet information matches the expected values
-    if payload_2 ["id"]:
-        Assertions.assert_json_value(update_response, "id", payload_2 ["id"], "Wrong pet_id in response")
-    Assertions.assert_json_value(update_response, "category", payload ["category"], "Wrong category in response")
-    Assertions.assert_json_value(update_response, "name", payload ["name"], "Wrong name in response")
-    Assertions.assert_json_value(update_response, "photoUrls", payload ["photoUrls"], "Wrong photo_urls in response")
-    Assertions.assert_json_value(update_response, "tags", payload ["tags"], "Wrong tags in response")
-    Assertions.assert_json_value(update_response, "status", payload ["status"], "Wrong status in response")
-
-    # Delete the updated pet
-    parsed_response_text = update_response.json( )
-    delete_pet_response = delete_pet(pet_id=parsed_response_text.get("id"), api_key=api_key)
+    # Delete the pet
+    delete_pet_response = delete_pet(pet_id=payload_2 ["id"], api_key=api_key)
     assert delete_pet_response.status_code == 200, "Wrong response code for delete pet"
