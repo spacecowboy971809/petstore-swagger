@@ -10,7 +10,7 @@ Some of the planned tests couldn't be implemented because certain defects were f
 
 This report includes passed tests, tests with errors, and incorrect tests that couldn't pass. Each test includes Description, Parameters, Execution, and an error description.
 ![Allure report](Docs/Allure_report.jpg)
-![Allure report owerview](Docs/Owerview_allure_report.jpg)
+![Allure report overview](Docs/Overview_allure_report.jpg)
 ## Logger example:
 _____
 **Test**: tests/test_pets/test_add_pet.py::test_add_pet[payload0-75309586-a480-43a8-a656-8228fab29bac] (call)<br>
